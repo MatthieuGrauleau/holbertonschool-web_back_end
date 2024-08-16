@@ -12,11 +12,11 @@ task_wait_random = __import__('3-tasks').task_wait_random
 async def task_wait_n(n: int, max_delay: int) -> typing.List[float]:
     """he code is nearly identical to wait_n
     except task_wait_random is being called."""
-    tasks = [task_wait_random(max_delay) for i in range(n)]
+    tasks = [task_wait_random(max_delay) for i in range(0, n)]
 
-    delays = []
+    waiting = []
     for task in asyncio.as_completed(tasks):
         delay = await task
-        insort(delays, delay)
+        insort(waiting, delay)
 
-    return delays
+    return waiting
